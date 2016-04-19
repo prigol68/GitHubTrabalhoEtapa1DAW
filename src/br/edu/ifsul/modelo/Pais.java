@@ -27,6 +27,7 @@ public class Pais implements Serializable {
     @SequenceGenerator(name = "seq_pais", sequenceName = "seq_pais_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_pais", strategy = GenerationType.SEQUENCE)
     private Integer id;
+    
     @NotBlank(message = "O nome do país deve ser informado")
     @Length(max = 50, message = "O nome do país não deve ter mais que {max} caracteres")
     @Column(name = "nome", length = 50, nullable = false)

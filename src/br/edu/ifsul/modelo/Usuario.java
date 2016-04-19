@@ -12,6 +12,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -31,17 +33,25 @@ public class Usuario extends Funcionario implements Serializable {
     @Length(max = 20, message = "O apelido não pode ter mais de {max} caracteres")
     @Column(name = "apelido", length = 20, nullable = false, unique = true)
     private String apelido;
+    
     @NotNull(message = "A senha não pode ser nulo")
     @NotBlank(message = "A senha deve ser informado")
     @Length(max = 20, message = "A senha não pode ter mais de {max} caracteres")
     @Column(name = "senha", length = 20, nullable = false)
     private String senha;
+    
     @NotNull(message = "Administrador não pode ser nulo")
     @Column(name = "administrador", nullable = false)
     private Boolean administrador;
+    
     @NotNull(message = "Ativo não pode ser nulo")
     @Column(name = "ativo", nullable = false)
     private Boolean ativo;
+    
+    @NotNull(message = "A filial deve ser informado")
+    @ManyToOne
+    @JoinColumn(name = "filial", referencedColumnName = "id", nullable = false)
+    private Filial filial;
     
     public Usuario() {
     }      
@@ -76,6 +86,14 @@ public class Usuario extends Funcionario implements Serializable {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Filial getFilial() {
+        return filial;
+    }
+
+    public void setFilial(Filial filial) {
+        this.filial = filial;
     }
 
 }

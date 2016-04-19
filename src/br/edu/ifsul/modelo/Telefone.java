@@ -44,7 +44,7 @@ public class Telefone implements Serializable{
     @Column(name = "descricao", length = 20)
     private String descricao;
     
-    @NotBlank(message = "A operadora deve ser informada")
+    
     @Length(max = 2, message = "A operadora não deve ter mais que {max} caracteres")
     @Column(name = "operadora", length = 2)
     private String operadora;

@@ -26,10 +26,12 @@ public class Estado implements Serializable{
     @SequenceGenerator(name = "seq_estado", sequenceName = "seq_estado_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_estado", strategy = GenerationType.SEQUENCE)
     private Integer id;
+    
     @NotBlank(message = "O nome deve ser informado")
     @Length(max = 50, message = "O nome não deve ultrapassar {max} caracteres")
     @Column(name = "nome", nullable = false, length = 50)
     private String nome;
+    
     @NotBlank(message = "A UF deve ser informada")
     @Length(min = 2, max = 2, message = "A UF deve ter {max} caracteres")
     @Column(name = "uf", nullable = false, length = 2)
