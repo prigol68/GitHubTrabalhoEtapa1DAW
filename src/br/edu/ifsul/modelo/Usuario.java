@@ -12,9 +12,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
@@ -25,6 +30,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author DanielPrigol
  */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "usuario")
 public class Usuario extends Funcionario implements Serializable {
 
@@ -53,9 +59,20 @@ public class Usuario extends Funcionario implements Serializable {
     @JoinColumn(name = "filial", referencedColumnName = "id", nullable = false)
     private Filial filial;
     
+    @ManyToMany
+    @JoinTable(name = "atuacoes",
+            joinColumns = 
+            @JoinColumn(name = "usuario", referencedColumnName = "id", 
+                    nullable = false),
+            inverseJoinColumns = 
+            @JoinColumn(name = "setor", referencedColumnName = "id", 
+                    nullable = false))    
+    private List<Setor> atuam = new ArrayList<>();
+    
+    
     public Usuario() {
     }      
-
+    
     public String getApelido() {
         return apelido;
     }
@@ -95,5 +112,17 @@ public class Usuario extends Funcionario implements Serializable {
     public void setFilial(Filial filial) {
         this.filial = filial;
     }
+
+    public List<Setor> getAtuam() {
+        return atuam;
+    }
+
+    public void setAtuam(List<Setor> atuam) {
+        this.atuam = atuam;
+    }
+
+    
+
+    
 
 }

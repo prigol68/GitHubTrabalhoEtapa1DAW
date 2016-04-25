@@ -5,6 +5,7 @@
  */
 package br.edu.ifsul.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,7 +34,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "setor")
-public class Setor {
+public class Setor implements Serializable{
     @Id
     @SequenceGenerator(name = "seq_setor", sequenceName = "seq_setor_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_setor", strategy = GenerationType.SEQUENCE)
@@ -49,37 +50,29 @@ public class Setor {
     @Column(name = "tipo", length = 50, nullable = false)
     private String tipo;
     
-    //@Column(name = "qtd_funcionario", nullable = false, columnDefinition = "numeric(12,2)")
-    //private Double qtdFuncionario;
+    @Column(name = "qtd_funcionario", nullable = false, columnDefinition = "numeric(12,2)")
+    private Double qtdFuncionario;
     
-    @OneToMany(mappedBy = "qtd_funcionario", cascade = CascadeType.ALL,
-            orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Funcionario> qtdFuncionario = new ArrayList<>();
+    //@OneToMany(mappedBy = "qtd_funcionario", cascade = CascadeType.ALL,
+    //        orphanRemoval = true, fetch = FetchType.LAZY)
+    //private List<Usuario> qtdFuncionario = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(name = "funcionario_setores",
+    @JoinTable(name = "atuacoes",
             joinColumns = 
             @JoinColumn(name = "setor", referencedColumnName = "id", 
                     nullable = false),
             inverseJoinColumns = 
-            @JoinColumn(name = "funcionario", referencedColumnName = "id", 
+            @JoinColumn(name = "usuario", referencedColumnName = "id", 
                     nullable = false))
-    private List<Funcionario> funcionario_setores = new ArrayList<>();
-    
+    private List<Funcionario> atuam = new ArrayList<>();
     
     
     public Setor() {
         
     }
     
-    public void adicionarQTDFuncionario(Funcionario obj){
-        obj.setSetor(this);
-        this.getQtdFuncionario().add(obj);
-    }
     
-    public void removertelefone(int index){
-        this.qtdFuncionario.remove(index);
-    }
     
     public Integer getId() {
         return id;
@@ -132,26 +125,36 @@ public class Setor {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Setor{" + "id=" + id + ", nome=" + nome + ", tipo=" + tipo + ", qtdFuncionario=" + getQtdFuncionario() + '}';
-    }
+   
 
-    public List<Funcionario> getFuncionario_setores() {
-        return funcionario_setores;
-    }
+    
+    
 
-    public void setFuncionario_setores(List<Funcionario> funcionario_setores) {
-        this.funcionario_setores = funcionario_setores;
-    }
-
-    public List<Funcionario> getQtdFuncionario() {
+    public Double getQtdFuncionario() {
         return qtdFuncionario;
     }
 
-    public void setQtdFuncionario(List<Funcionario> qtdFuncionario) {
+    public void setQtdFuncionario(Double qtdFuncionario) {
         this.qtdFuncionario = qtdFuncionario;
     }
+
+    public List<Funcionario> getAtuam() {
+        return atuam;
+    }
+
+    public void setAtuam(List<Funcionario> atuam) {
+        this.atuam = atuam;
+    }
+
+    @Override
+    public String toString() {
+        return "Setor{" + "id=" + id + ", nome=" + nome + ", tipo=" + tipo + ", qtdFuncionario=" + qtdFuncionario + ", atuam=" + atuam + '}';
+    }
+
+    
+
+    
+    
 
     
 

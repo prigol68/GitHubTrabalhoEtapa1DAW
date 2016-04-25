@@ -11,6 +11,7 @@ import br.edu.ifsul.jpa.EntityManagerUtil;
 import br.edu.ifsul.modelo.Cidade;
 import br.edu.ifsul.modelo.Funcionario;
 import br.edu.ifsul.modelo.Setor;
+import br.edu.ifsul.modelo.Telefone;
 import br.edu.ifsul.modelo.Usuario;
 import java.util.Calendar;
 import javax.persistence.EntityManager;
@@ -25,11 +26,11 @@ import org.junit.Test;
  *
  * @author daniel prigol
  */
-public class TestePersistirFuncionarioSetores {
+public class TestePersistirSetor {
 
     EntityManager em;
 
-    public TestePersistirFuncionarioSetores() {
+    public TestePersistirSetor() {
     }
 
     @Before
@@ -48,12 +49,13 @@ public class TestePersistirFuncionarioSetores {
     public void teste() {
         boolean exception = false;
         try {
-            Funcionario f = em.find(Funcionario.class, 2);
-            Setor s = em.find(Setor.class, 1);
-            f.getFuncionario_setores().add(s);
+            Setor s = new Setor();
+            s.setNome("Administração");
+            s.setTipo("Financeiro");
+            s.setQtdFuncionario(2.00);
             
             em.getTransaction().begin();
-            em.persist(f);
+            em.persist(s);
             em.getTransaction().commit();
         } catch (Exception e) {
             exception = true;
