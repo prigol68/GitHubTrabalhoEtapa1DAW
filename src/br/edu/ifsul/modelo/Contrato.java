@@ -50,9 +50,6 @@ public class Contrato implements Serializable{
     @Column(name = "dataDemissao", nullable = false)
     private Calendar dataDemissao;
     
-    @ManyToOne
-    @JoinColumn(name = "funcionario", referencedColumnName = "id", nullable = false)
-    private Funcionario funcionario;
 
     public Contrato() {
     }
@@ -127,13 +124,7 @@ public class Contrato implements Serializable{
         return "Contrato{" + "id=" + id + ", salario=" + salario + ", status=" + status + ", dataAdm=" + dataAdm + ", dataDemissao=" + dataDemissao + '}';
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
+    
 
     
 

@@ -46,7 +46,6 @@ public class TestePersistirContrato {
         Boolean exception = false;
         try{
             Contrato c = new Contrato();
-            c.setFuncionario(em.find(Funcionario.class, 1));
             c.setSalario(5000.00);
             c.setDataAdm(new GregorianCalendar(2012, Calendar.JANUARY, 21));
             c.setStatus(true);

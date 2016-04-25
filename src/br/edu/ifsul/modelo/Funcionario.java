@@ -78,7 +78,10 @@ public abstract class Funcionario implements Serializable{
             orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Telefone> telefones = new ArrayList<>();
     
-    
+    @NotNull(message = "O contrato deve ser informado")
+    @ManyToOne
+    @JoinColumn(name = "contrato", referencedColumnName = "id", nullable = false)
+    private Contrato contrato;
      
     public Funcionario() {
     }
@@ -184,6 +187,14 @@ public abstract class Funcionario implements Serializable{
 
     public void setTelefones(List<Telefone> telefones) {
         this.telefones = telefones;
+    }
+
+    public Contrato getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
     }
 
     
