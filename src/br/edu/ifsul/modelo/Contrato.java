@@ -47,7 +47,7 @@ public class Contrato implements Serializable{
     private Calendar dataAdm;
     
     @Temporal(TemporalType.DATE)
-    @Column(name = "dataDemissao", nullable = false)
+    @Column(name = "dataDemissao", nullable = true)
     private Calendar dataDemissao;
     
 

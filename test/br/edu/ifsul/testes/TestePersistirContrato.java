@@ -48,6 +48,7 @@ public class TestePersistirContrato {
             Contrato c = new Contrato();
             c.setSalario(5000.00);
             c.setDataAdm(new GregorianCalendar(2012, Calendar.JANUARY, 21));
+            c.setDataDemissao(new GregorianCalendar());
             c.setStatus(true);
             
             em.getTransaction().begin();

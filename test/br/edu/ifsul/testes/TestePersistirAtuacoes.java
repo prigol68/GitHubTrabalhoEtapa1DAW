@@ -9,6 +9,8 @@ package br.edu.ifsul.testes;
 
 import br.edu.ifsul.jpa.EntityManagerUtil;
 import br.edu.ifsul.modelo.Cidade;
+import br.edu.ifsul.modelo.Setor;
+
 import br.edu.ifsul.modelo.Usuario;
 import java.util.Calendar;
 import javax.persistence.EntityManager;
@@ -23,11 +25,11 @@ import org.junit.Test;
  *
  * @author daniel prigol
  */
-public class TestePersistirUsuario {
+public class TestePersistirAtuacoes {
 
     EntityManager em;
 
-    public TestePersistirUsuario() {
+    public TestePersistirAtuacoes() {
     }
 
     @Before
@@ -46,18 +48,10 @@ public class TestePersistirUsuario {
     public void teste() {
         boolean exception = false;
         try {
-            Usuario obj = new Usuario();
-            obj.setNome("Joao");
-            obj.setBairro("Centro");
-            obj.setCidade(em.find(Cidade.class, 1));
-            obj.setComplemento("CASA");
-            obj.setEmail("teste@hotmail.com");
-            obj.setEndereco("Rua YYY");
-            obj.setApelido("troll");
-            obj.setSenha("321");
+            Usuario obj = em.find(Usuario.class, 1);
+            Setor s = em.find(Setor.class, 1);
+            obj.getAtua().add(s);
             
-            obj.setAdministrador(false);
-            obj.setAtivo(true);
             em.getTransaction().begin();
             em.persist(obj);
             em.getTransaction().commit();

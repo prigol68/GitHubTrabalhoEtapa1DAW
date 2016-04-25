@@ -43,8 +43,8 @@ public class TestePersistirEstado {
         Boolean exception = false;
         try{
             Estado e = new Estado();
-            e.setNome("Rio Grande do Sul");
-            e.setUf("RS");
+            e.setNome("Sao Paulo");
+            e.setUf("SP");
             e.setPais(em.find(Pais.class, 1));
             
             em.getTransaction().begin();

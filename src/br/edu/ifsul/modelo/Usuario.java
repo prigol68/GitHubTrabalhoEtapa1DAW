@@ -67,7 +67,7 @@ public class Usuario extends Funcionario implements Serializable {
             inverseJoinColumns = 
             @JoinColumn(name = "setor", referencedColumnName = "id", 
                     nullable = false))    
-    private List<Setor> atuam = new ArrayList<>();
+    private List<Setor> atua = new ArrayList<>();
     
     
     public Usuario() {
@@ -113,13 +113,15 @@ public class Usuario extends Funcionario implements Serializable {
         this.filial = filial;
     }
 
-    public List<Setor> getAtuam() {
-        return atuam;
+    public List<Setor> getAtua() {
+        return atua;
     }
 
-    public void setAtuam(List<Setor> atuam) {
-        this.atuam = atuam;
+    public void setAtua(List<Setor> atua) {
+        this.atua = atua;
     }
+
+    
 
     
 
