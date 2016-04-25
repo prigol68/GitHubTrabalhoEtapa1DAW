@@ -77,9 +77,29 @@ public abstract class Funcionario implements Serializable{
             orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Telefone> telefones = new ArrayList<>();
     
+    @NotNull(message = "O setor deve ser informado")
+    @ManyToOne
+    @JoinColumn(name = "setor_id", referencedColumnName = "id", nullable = false)
+    private Setor setor;
+    
+    
+    @ManyToMany
+    @JoinTable(name = "funcionario_setores",
+            joinColumns = 
+            @JoinColumn(name = "funcionario", referencedColumnName = "id", 
+                    nullable = false),
+            inverseJoinColumns = 
+            @JoinColumn(name = "setor", referencedColumnName = "id", 
+                    nullable = false))    
+    private List<Setor> funcionario_setores = new ArrayList<>();
+    
+    
+    
     
     public Funcionario() {
     }
+    
+    
     
     public void adicionarTelefone(Telefone obj){
         obj.setFuncionario(this);
@@ -182,9 +202,23 @@ public abstract class Funcionario implements Serializable{
         this.telefones = telefones;
     }
 
-    
+    public List<Setor> getFuncionario_setores() {
+        return funcionario_setores;
+    }
+
+    public void setFuncionario_setores(List<Setor> funcionario_setores) {
+        this.funcionario_setores = funcionario_setores;
+    }
+
+    public Setor getSetor() {
+        return setor;
+    }
+
+    public void setSetor(Setor setor) {
+        this.setor = setor;
+    }
 
     
-    
-    
+
+  
 }
